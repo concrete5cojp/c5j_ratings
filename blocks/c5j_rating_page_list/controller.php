@@ -338,4 +338,43 @@ class Controller extends \Concrete\Block\PageList\Controller
 
         return true;
     }
+    
+    public function view()
+    {
+        $list = $this->list;
+        $nh = $this->app->make('helper/navigation');
+        $this->set('nh', $nh);
+        
+        if ($this->pfID) {
+            $this->requireAsset('css', 'font-awesome');
+            $feed = Feed::getByID($this->pfID);
+            if (is_object($feed)) {
+                $this->set('rssUrl', $feed->getFeedURL());
+                $link = $feed->getHeadLinkElement();
+                $this->addHeaderItem($link);
+            }
+        }
+        
+        //Pagination...
+        $showPagination = false;
+        if ($this->num > 0) {
+            $list->setItemsPerPage($this->num);
+            $pagination = $list->getPagination();
+            $pages = $pagination->getCurrentPageResults();
+            if ($pagination->haveToPaginate() && $this->paginate && count($list->getResults()) === count($pagination)) {
+                $showPagination = true;
+                $pagination = $pagination->renderDefaultView();
+                $this->set('pagination', $pagination);
+            }
+        } else {
+            $pages = $list->getResults();
+        }
+        
+        if ($showPagination) {
+            $this->requireAsset('css', 'core/frontend/pagination');
+        }
+        $this->set('pages', $pages);
+        $this->set('list', $list);
+        $this->set('showPagination', $showPagination);
+    }
 }
