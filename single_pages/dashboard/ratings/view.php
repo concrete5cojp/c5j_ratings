@@ -2,6 +2,7 @@
 defined('C5_EXECUTE') or die('Access Denied.');
 use Concrete\Core\User\UserInfoRepository;
 
+/** @var \Concrete\Core\View\View $view */
 $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
 /* @var Concrete\Core\Form\Service\Form $form */
 $form = $app->make('helper/form');
@@ -11,6 +12,7 @@ $token = $app->make('helper/validation/token');
 $dh = $app->make('helper/date');
 /** @var string $rated_date */
 $rated_date = $rated_date ?? null;
+$query = $query ?? '';
 ?>
 <style>
     .ratings-header-menu{

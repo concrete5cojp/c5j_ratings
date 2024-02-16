@@ -2,6 +2,10 @@
 defined('C5_EXECUTE') or die('Access Denied.');
 use Concrete\Core\Page\Page;
 
+/** @var \Concrete\Package\C5jRatings\Block\C5jRatingPageList\Controller $controller */
+/** @var \Concrete\Core\View\View $view */
+
+$bID = $bID ?? 0;
 $c = Page::getCurrentPage();
 $app = \Concrete\Core\Support\Facade\Application::getFacadeApplication();
 /** @var \Concrete\Core\Utility\Service\Text $th */
@@ -10,6 +14,22 @@ $th = $app->make('helper/text');
 $dh = $app->make('helper/date');
 $pages = $pages ?? [];
 $showPagination = $showPagination ?? [];
+$pagination = $pagination ?? '';
+$noResultsMessage = $noResultsMessage ?? '';
+$titleFormat = $titleFormat ?? 'h3';
+$displayThumbnail = $displayThumbnail ?? false;
+$truncateSummaries = $truncateSummaries ?? false;
+$truncateChars = $truncateChars ?? 300;
+$includeName = $includeName ?? true;
+$includeDate = $includeDate ?? true;
+$includeDescription = $includeDescription ?? true;
+$useButtonForLink = $useButtonForLink ?? false;
+$buttonLinkText = $buttonLinkText ?? t('Read More');
+$includeEntryText = false;
+$btnType = $btnType ?? 'clap';
+$displayRatings = $displayRatings ?? false;
+$ratings = $ratings ?? [];
+
 
 if (is_object($c) && $c->isEditMode() && $controller->isBlockEmpty()) {
     ?>
