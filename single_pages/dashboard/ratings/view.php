@@ -19,7 +19,7 @@ $rated_date = $rated_date ?? null;
         /*right: 35px;*/
     }
     div#ccm-dashboard-content-inner{
-        padding-top: 0px !important;
+        padding-top: 0 !important;
     }
     .ccm-header-search-form-input{
         display: inline-block;
@@ -27,8 +27,8 @@ $rated_date = $rated_date ?? null;
     ul.ccm-header-search-navigation {
         list-style: none;
         text-align: right;
-        padding: 4px 0px 0px 0px;
-        margin:0px 0px 0px 0px
+        padding: 4px 0 0 0;
+        margin:0 0 0 0
     }
 </style>
 <?php
