@@ -21,7 +21,7 @@ trait RatingTrait
     {
         $this->token = $this->app->make('helper/validation/token');
         $uID = (int) $this->post('uID');
-        if ($this->validate('rating', $this->post('token'), $uID)) {
+        if ($this->validateToken('rating', $this->post('token'), $uID)) {
             $cID = (int) $this->post('cID');
             $ratedValue = $this->post('ratedValue');
             $this->addRating($uID, $cID, $bID, $ratedValue);
@@ -36,7 +36,7 @@ trait RatingTrait
     {
         $this->token = $this->app->make('helper/validation/token');
         $uID = (int) $this->post('uID');
-        if ($this->validate('rating', $this->post('token'), $uID)) {
+        if ($this->validateToken('rating', $this->post('token'), $uID)) {
             $cID = (int) $this->post('cID');
 
             return JsonResponse::create($this->getRatings($cID, $uID));
@@ -64,7 +64,7 @@ trait RatingTrait
         return $time . ':' . md5($time . ':' . $uID . ':' . $action . ':' . $config->get('concrete.security.token.validation'));
     }
 
-    public function validate($action = '', $token = null, $uID = 0): bool
+    public function validateToken($action = '', $token = null, $uID = 0): bool
     {
         $app = Application::getFacadeApplication();
         if ($token === null) {
